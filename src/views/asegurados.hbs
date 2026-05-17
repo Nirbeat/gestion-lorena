@@ -1,0 +1,289 @@
+{{!-- <section class="page-header">
+    <h1>Gestión de Asegurados</h1>
+    <p class="subtitle">Busque un asegurado por dominio para visualizar y editar sus datos</p>
+</section>
+
+<!-- Barra de Búsqueda -->
+<div class="filter-bar">
+    <form action="/asegurados" method="GET" class="filter-form"
+        style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <label for="search_dominio" style="font-weight: 600; color: var(--primary);">Buscar Dominio:</label>
+            <input type="text" id="search_dominio" name="dominio" value="{{dominio}}" placeholder="Ej: AB123CD" required
+                style="padding: 0.5rem 0.75rem; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.95rem; text-transform: uppercase;" />
+            <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+        </div>
+        {{#if asegurado}}
+        <div>
+            <span class="badge badge-auto"
+                style="padding: 0.5rem 1rem; font-size: 0.85rem; background: #e0f2fe; color: #0369a1;">Asegurado:
+                {{asegurado.nombre}}</span>
+        </div>
+        {{/if}}
+    </form>
+</div>
+
+{{#if error}}
+<div class="empty-state"
+    style="border-left: 4px solid var(--danger); margin-bottom: 2rem; text-align: left; padding: 1.5rem 2rem;">
+    <p
+        style="color: var(--danger); font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>⚠️</span> {{error}}
+    </p>
+</div>
+{{/if}}
+
+{{#if asegurado}}
+<!-- Formulario de Visualización y Edición -->
+<form action="/api/asegurados/{{asegurado.dominio}}" method="POST" class="form-card" id="form-asegurado">
+    <div class="form-grid">
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label for="nombre">Nombre y Apellido</label>
+            <div class="input-editable-wrapper">
+                <input type="text" id="nombre" name="nombre" value="{{asegurado.nombre}}" readonly required />
+                <button type="button" class="btn-edit" id="btn-nombre" onclick="habilitarCampo('nombre', 'btn-nombre')"
+                    title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <div class="input-editable-wrapper">
+                <input type="text" id="telefono" name="telefono" value="{{asegurado.telefono}}" readonly required />
+                <button type="button" class="btn-edit" id="btn-telefono"
+                    onclick="habilitarCampo('telefono', 'btn-telefono')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dominio -->
+        <div class="form-group">
+            <label for="dominio">Dominio / Patente</label>
+            <div class="input-editable-wrapper">
+                <input type="text" id="dominio" name="dominio" value="{{asegurado.dominio}}" readonly required
+                    style="text-transform: uppercase;" />
+                <button type="button" class="btn-edit" id="btn-dominio"
+                    onclick="habilitarCampo('dominio', 'btn-dominio')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Próximo Importe -->
+        <div class="form-group">
+            <label for="proximoImporte">Próximo Importe ($)</label>
+            <div class="input-editable-wrapper">
+                <input type="number" id="proximoImporte" name="próximoImporte" value="{{asegurado.próximoImporte}}"
+                    step="0.01" min="0" readonly required />
+                <button type="button" class="btn-edit" id="btn-proximoImporte"
+                    onclick="habilitarCampo('proximoImporte', 'btn-proximoImporte')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Próxima Cuota -->
+        <div class="form-group">
+            <label for="proximaCuota">Próxima Cuota</label>
+            <div class="input-editable-wrapper">
+                <input type="number" id="proximaCuota" name="próximaCuota" value="{{asegurado.próximaCuota}}" min="1"
+                    readonly required />
+                <button type="button" class="btn-edit" id="btn-proximaCuota"
+                    onclick="habilitarCampo('proximaCuota', 'btn-proximaCuota')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Próximo Vencimiento -->
+        <div class="form-group">
+            <label for="proximoVencimiento">Próximo Vencimiento</label>
+            <div class="input-editable-wrapper">
+                <input type="date" id="proximoVencimiento" name="proximoVencimiento"
+                    value="{{asegurado.proximoVencimientoFormated}}" readonly required />
+                <button type="button" class="btn-edit" id="btn-proximoVencimiento"
+                    onclick="habilitarCampo('proximoVencimiento', 'btn-proximoVencimiento')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Recargo -->
+        <div class="form-group">
+            <label for="recargo">Recargo ($)</label>
+            <div class="input-editable-wrapper">
+                <input type="number" id="recargo" name="recargo" value="{{asegurado.recargo}}" step="0.01" min="0"
+                    readonly />
+                <button type="button" class="btn-edit" id="btn-recargo"
+                    onclick="habilitarCampo('recargo', 'btn-recargo')" title="Editar campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.03l-.179.178c-.098.098-.24.154-.386.154H1.5a.5.5 0 0 1-.5-.5V1.207a.5.5 0 0 1 .146-.353l.5-.5a.5.5 0 0 1 .708 0L3.5 1.5h.207a.5.5 0 0 1 .353.146l.5.5a.5.5 0 0 1 0 .708L4.207 3.5H4.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l4.032-4.032c.083-.083.18-.153.287-.207l.179-.178a.499.499 0 0 1-.175-.03z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-actions" style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+        <button type="submit" class="btn btn-primary" id="btn-submit-actualizar">Actualizar Datos</button>
+    </div>
+</form>
+
+<div id="api-feedback" class="empty-state"
+    style="display: none; margin-top: 1.5rem; border-left: 4px solid var(--accent); text-align: left; padding: 1.5rem; max-width: 100%;">
+    <h3 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1.15rem; font-weight: 700;">Simulación de Envío
+        de Datos</h3>
+    <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">Se envió una solicitud <code>POST</code> al endpoint
+        <strong><span id="feedback-url"></span></strong> con los siguientes datos:</p>
+    <pre id="feedback-data"
+        style="background: #fafafa; padding: 1rem; border-radius: 6px; border: 1px solid var(--border); font-family: monospace; font-size: 0.85rem; overflow-x: auto; white-space: pre-wrap; word-break: break-all;"></pre>
+</div>
+{{else}}
+{{#unless error}}
+<div class="empty-state">
+    <p>Utilice la barra superior para buscar un asegurado por su dominio / patente.</p>
+</div>
+{{/unless}}
+{{/if}}
+
+<style>
+    .input-editable-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .input-editable-wrapper input {
+        width: 100%;
+        padding-right: 2.5rem !important;
+    }
+
+    .input-editable-wrapper input[readonly] {
+        background-color: #f3f4f6;
+        color: #4b5563;
+        border-color: #e5e7eb;
+        cursor: not-allowed;
+    }
+
+    .btn-edit {
+        position: absolute;
+        right: 8px;
+        background: none;
+        border: none;
+        color: var(--primary-light);
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s, transform 0.15s;
+        border-radius: 4px;
+    }
+
+    .btn-edit:hover {
+        color: var(--accent);
+        transform: scale(1.15);
+    }
+
+    .btn-edit.edit-active {
+        color: var(--success) !important;
+    }
+</style>
+
+<script>
+    function habilitarCampo(inputId, btnId) {
+        const input = document.getElementById(inputId);
+        const btn = document.getElementById(btnId);
+
+        if (input.hasAttribute('readonly')) {
+            input.removeAttribute('readonly');
+            input.focus();
+            btn.classList.add('edit-active');
+
+            // If it's a text input, move cursor to the end
+            if (input.type === 'text') {
+                const val = input.value;
+                input.value = '';
+                input.value = val;
+            }
+        } else {
+            input.setAttribute('readonly', 'readonly');
+            btn.classList.remove('edit-active');
+        }
+    }
+
+    // Interceptamos la submission para simular y ejecutar la peticion
+    const form = document.getElementById('form-asegurado');
+    if (form) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            const actionUrl = form.getAttribute('action');
+
+            // Mostrar feedback en pantalla
+            const feedbackDiv = document.getElementById('api-feedback');
+            const feedbackUrl = document.getElementById('feedback-url');
+            const feedbackData = document.getElementById('feedback-data');
+
+            feedbackUrl.textContent = actionUrl;
+            feedbackData.textContent = JSON.stringify(data, null, 2);
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.scrollIntoView({ behavior: 'smooth' });
+
+            // Realizar la petición fetch al endpoint (el cual fallará o devolverá 404 porque no está implementado en el backend)
+            try {
+                const response = await fetch(actionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                console.log('Respuesta del servidor:', response.status);
+            } catch (err) {
+                console.warn('Error en la petición (esperado si no está implementada la ruta):', err);
+            }
+        });
+    }
+</script> --}}

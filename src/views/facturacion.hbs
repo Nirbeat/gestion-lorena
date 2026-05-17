@@ -1,0 +1,88 @@
+<section class="page-header">
+  <h1>Facturación</h1>
+  <p class="subtitle">Registre una nueva cuota de seguro</p>
+</section>
+
+<form action="/api/facturas" method="POST" class="form-card">
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="cuota">Cuota N°</label>
+      <input type="number" name="cuota" min="1" placeholder="Número de cuota" required />
+    </div>
+
+    <div class="form-group">
+      <label for="compañia">Compañía</label>
+      <input type="text" name="compania" placeholder="Ej: Sancor Seguros" required />
+    </div>
+
+    <div class="form-group">
+      <label for="asegurado">Asegurado</label>
+      <input type="text" name="asegurado" placeholder="Nombre y apellido" required />
+    </div>
+
+    <div class="form-group">
+      <label for="matricula">N° Póliza</label>
+      <input type="text" name="nroPoliza" placeholder="Ej: 0123456" required />
+    </div>
+
+    <div class="form-group">
+      <label for="tipoDeVehiculo">Tipo de vehículo</label>
+      <select name="tipoDeVehiculo" required>
+        <option value="">Seleccionar...</option>
+        <option value="auto">Auto</option>
+        <option value="moto">Moto</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="vehiculo">Marca</label>
+      <input type="text" name="vehiculo" placeholder="Ej: Ford Fiesta" required />
+    </div>
+
+
+    <div class="form-group">
+      <label for="dominio">Dominio</label>
+      <input type="text" name="dominio" placeholder="Ej: AB123CD" required />
+    </div>
+
+
+    <div class="form-group">
+      <label for="precio">Cobertura</label>
+      <input type="text" name="cobertura" placeholder="Ej: R.C." required />
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Otros</label>
+      <input type="text" name="otros" placeholder="Ej: Uso particular" required />
+    </div>
+
+    <div class="form-group">
+      <label for="precio">Importe ($)</label>
+      <input type="number" name="importe" placeholder="0.00" required />
+    </div>
+
+    <div class="form-group">
+      <label for="proxVencimiento">Próximo vencimiento</label>
+      <input type="date" name="proxVencimiento" required />
+    </div>
+
+  </div>
+
+  <div class="form-checkbox">
+    <div class="checkbox-left">
+      <input type="checkbox" id="esTransferencia" name="esTransferencia" value="true" {{!-- llevar este listener a JS
+        --}} onchange="document.getElementById('recargo-wrapper').style.display = this.checked ? 'flex' : 'none'" />
+      <label for="esTransferencia">Es transferencia (aplica recargo)</label>
+    </div>
+    <div class="recargo-wrapper" id="recargo-wrapper" style="display:none;">
+      <label for="recargo">Recargo ($)</label>
+      <input type="number" id="recargo" name="recargo" step="0.01" min="0" placeholder="0.00" />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Generar Factura</button>
+    <button type="reset" class="btn btn-secondary" {{!-- llevar este listener a JS --}}
+      onclick="document.getElementById('recargo-wrapper').style.display='none'; document.getElementById('esTransferencia').checked=false">Limpiar</button>
+  </div>
+</form>

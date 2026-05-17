@@ -1,0 +1,68 @@
+<section class="page-header">
+  <h1>Reporte Diario</h1>
+  <p class="subtitle">Consulte las facturas registradas por fecha</p>
+</section>
+
+<div class="filter-bar"
+  style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+  <form action="/reportediario" method="GET" class="filter-form">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" value="{{fecha}}" />
+    <button type="submit" class="btn btn-primary btn-sm">Consultar</button>
+  </form>
+  <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+    <div class="total-transacciones"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(107, 114, 128, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(107, 114, 128, 0.25);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Transacciones:</span>
+      <strong style="color: #4b5563; font-size: 1.25rem; font-weight: 700;">{{totalTransacciones}}</strong>
+    </div>
+    <div class="total-entrada"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(44, 95, 138, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(44, 95, 138, 0.25);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Entrada:</span>
+      <strong style="color: var(--primary-light); font-size: 1.25rem; font-weight: 700;">$ {{entradaTotal}}</strong>
+    </div>
+    <div class="total-efectivo"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(16, 185, 129, 0.2);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Efectivo:</span>
+      <strong style="color: var(--success); font-size: 1.25rem; font-weight: 700;">$ {{efectivo}}</strong>
+    </div>
+    <div class="total-transferencia"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(212, 168, 67, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(212, 168, 67, 0.25);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Transferencia:</span>
+      <strong style="color: var(--accent); font-size: 1.25rem; font-weight: 700;">$ {{transferencia}}</strong>
+    </div>
+  </div>
+</div>
+
+{{#if facturas.length}}
+<div class="table-card">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Cuota</th>
+        <th>Compañía</th>
+        <th>Asegurado</th>
+        <th>Dominio</th>
+        <th>Precio</th>
+        <th>Recargo transferencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each facturas}}
+      <tr>
+        <td>{{cuota}}</td>
+        <td>{{compania}}</td>
+        <td>{{asegurado}}</td>
+        <td>{{dominio}}</td>
+        <td>$ {{importe}}</td>
+        <td>{{#if recargo}}$ {{recargo}}{{else}}—{{/if}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<div class="empty-state">
+  <p>No se encontraron facturas para la fecha seleccionada.</p>
+</div>
+{{/if}}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{titulo}} — PASI Lorena Martin</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">🛡️</span>
+      <span class="brand-text">PASI <strong>Lorena Martin</strong></span>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="/facturacion" class="nav-link">Facturación</a></li>
+      <li><a href="/reportediario" class="nav-link">Reporte Diario</a></li>
+      {{!-- <li class="nav-item-dropdown">
+        <a href="#" class="nav-link">Asegurados <span class="arrow">▾</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/agregarAsegurado" class="dropdown-item">Agregar Asegurado</a></li>
+          <li><a href="/asegurados" class="dropdown-item">Buscar y Editar</a></li>
+          <li><a href="/proximosVencimientos" class="dropdown-item">Próximos Vencimientos</a></li>
+        </ul>
+      </li> --}}
+    </ul>
+  </nav>
+
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  <footer class="footer">
+    <p>&copy; {{year}} PASI Lorena Martin — Todos los derechos reservados</p>
+  </footer>
+</body>
+
+</html>
