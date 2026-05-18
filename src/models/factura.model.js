@@ -14,26 +14,30 @@ const facturaSchema = new Schema({
         type: String,
         required: true,
         trim: true,
+        uppercase: true
     },
     asegurado: {
         type: String,
         required: true,
         trim: true,
+        uppercase: true
     },
     tipoDeVehiculo: {
         type: String,
-        required: true,
-        enum: ['moto', 'auto'],
+        default: "---",
+        enum: ['moto', 'auto', "---"]
     },
     cobertura: {
         type: String,
         required: true,
         trim: true,
+        uppercase: true
     },
     dominio: {
         type: String,
-        required: true,
         trim: true,
+        default: "---",
+        uppercase: true
     },
     importe: {
         type: Number,
@@ -46,17 +50,19 @@ const facturaSchema = new Schema({
     },
     vehiculo: {
         type: String,
-        required: true,
         trim: true,
+        default: "---",
+        uppercase: true
     },
     otros: {
         type: String,
-        required: true,
         trim: true,
+        default: "---",
+        uppercase: true
     },
     // ACA IRIA EL DETALLE DE TIPO DE USO
     cuota: {
-        type: Number,
+        type: String,
         required: true,
         min: 0,
     },

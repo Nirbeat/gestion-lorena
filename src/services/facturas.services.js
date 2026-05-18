@@ -9,7 +9,7 @@ export async function resumenFacturasFecha(fecha) {
             $gte: inicioDia,
             $lte: finDia,
         },
-    }).sort({ _id: -1 }).lean();
+    }).lean();
 
     let efectivo = 0;
     let transferencia = 0;
