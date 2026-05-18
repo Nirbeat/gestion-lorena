@@ -1,6 +1,6 @@
 export async function definirFechaConsulta(req, res, next) {
     if (!req.query.fecha) {
-        const hoy = new Date();
+        const hoy = new Date(Date.now());
 
         const anio = hoy.getFullYear();
         const mes = String(hoy.getMonth() + 1).padStart(2, '0');

@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const facturaSchema = new Schema({
     fechaDePago: {
         type: Date,
-        default: new Date(Date.now())
+        default: new Date()
     },
     nroPoliza: {
         type: String,

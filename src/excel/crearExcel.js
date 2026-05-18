@@ -8,8 +8,8 @@ export async function createSheet(data) {
     const file = await workbook.xlsx.readFile(filePath);
     const sheet = file.getWorksheet("Hoja1");
 
-    sheet.getCell("D2").value = `Fecha de pago:         ${new Date(Date.now()).toLocaleDateString()}`;
-    sheet.getCell("D22").value = `Fecha de pago:         ${new Date(Date.now()).toLocaleDateString()}`;
+    sheet.getCell("D2").value = `Fecha de pago:         ${new Date(Date.now()).toLocaleDateString("es-AR", { timeZone: "UTC" })}`;
+    sheet.getCell("D22").value = `Fecha de pago:         ${new Date(Date.now()).toLocaleDateString("es-AR", { timeZone: "UTC" })}`;
 
     sheet.getCell("D4").value = `Número de Cuota:   ${data.cuota}`;
     sheet.getCell("D24").value = `Número de Cuota:   ${data.cuota}`;
