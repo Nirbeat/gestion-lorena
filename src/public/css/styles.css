@@ -114,6 +114,48 @@ body {
   box-shadow: var(--shadow);
 }
 
+/* ─── Search Card ─── */
+.search-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--accent);
+}
+
+.search-input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.search-input-group input {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fafafa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(44, 95, 138, 0.15);
+  background: #fff;
+}
+
+.search-error-message {
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -210,6 +252,23 @@ body {
   outline: none;
   border-color: var(--primary-light);
   box-shadow: 0 0 0 3px rgba(44, 95, 138, 0.15);
+}
+
+/* ─── Disabled Inputs visual state ─── */
+.form-group input:disabled,
+.form-group select:disabled,
+.recargo-wrapper input:disabled {
+  background-color: #eceff1;
+  color: #90a4ae;
+  border-color: #cfd8dc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.form-group:has(input:disabled),
+.recargo-wrapper:has(input:disabled) {
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
 }
 
 .form-actions {

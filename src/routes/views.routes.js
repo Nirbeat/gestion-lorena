@@ -51,4 +51,7 @@ router.get("/asegurados", async (req, res) => {
   //   error
   // });
 });
+router.use(async (error, req, res, next) => {
+  res.send("ocurrio un error inesperado")
+})
 export default router;

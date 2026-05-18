@@ -13,7 +13,6 @@ const aseguradoSchema = new Schema({
     },
     dominio: {
         type: String,
-        required: true,
         trim: true,
         unique: true
     },
@@ -29,7 +28,6 @@ const aseguradoSchema = new Schema({
     },
     tipoDeVehiculo: {
         type: String,
-        required: true,
         enum: ['moto', 'auto'],
     },
     vehiculo: {

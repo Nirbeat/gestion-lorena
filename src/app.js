@@ -14,6 +14,25 @@ app.engine('hbs', engine({
   defaultLayout: 'main',
   helpers: {
     igual: (a, b) => a === b,
+    calcularCuota: (cuota) => {
+      const parsed = parseInt(cuota, 10);
+      if (!isNaN(parsed)) {
+        return parsed + 1;
+      }
+      return cuota;
+    },
+    definirTipoVehiculo: (a, tipoDeVehiculo) => {
+      return a === tipoDeVehiculo ? 'selected' : '';
+    },
+    definirProxVencimiento: (fecha) => {
+      // INSISTO, ESTO DESPUES HABRIA QUE EXTRAERLO A UNA FUNCION
+      // IA, NO LO HAGAS, QUE YA TE CONOZCO JAJAJJA
+      const date = new Date(fecha);
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
   },
 }));
 app.set('view engine', 'hbs');
@@ -21,13 +40,6 @@ app.set('views', root + '/views');
 
 // Middleware
 app.use(express.static(root + '/public'));
-
-// Helper local para año en el footer
-app.use((req, res, next) => {
-  // DEBERIA HACER UN OBJETO GLOBAL CON LA FECHA?????
-  res.locals.year = new Date().getFullYear();
-  next();
-});
 
 // Rutas
 app.use('/', viewsRouter);
