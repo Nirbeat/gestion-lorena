@@ -4,22 +4,19 @@
 </section>
 
 <div class="filter-bar"
-  style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-  <form action="/reportediario" method="GET" class="filter-form">
+  style="display: flex; flex-direction: column; gap: 1rem;">
+  <form action="/reportediario" method="GET" class="filter-form" style="margin-bottom: 0.5rem;">
     <label for="fecha">Fecha:</label>
     <input type="date" id="fecha" name="fecha" value="{{fecha}}" />
     <button type="submit" class="btn btn-primary btn-sm">Consultar</button>
   </form>
+
+  <!-- Fila 1: Total General, Efectivo, Transferencia -->
   <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-    <div class="total-transacciones"
-      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(107, 114, 128, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(107, 114, 128, 0.25);">
-      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Transacciones:</span>
-      <strong style="color: #4b5563; font-size: 1.25rem; font-weight: 700;">{{totalTransacciones}}</strong>
-    </div>
     <div class="total-entrada"
       style="display: flex; align-items: center; gap: 0.5rem; background: rgba(44, 95, 138, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(44, 95, 138, 0.25);">
-      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Entrada:</span>
-      <strong style="color: var(--primary-light); font-size: 1.25rem; font-weight: 700;">$ {{entradaTotal}}</strong>
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total General:</span>
+      <strong style="color: var(--primary-light); font-size: 1.25rem; font-weight: 700;">$ {{total}}</strong>
     </div>
     <div class="total-efectivo"
       style="display: flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(16, 185, 129, 0.2);">
@@ -28,8 +25,31 @@
     </div>
     <div class="total-transferencia"
       style="display: flex; align-items: center; gap: 0.5rem; background: rgba(212, 168, 67, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(212, 168, 67, 0.25);">
-      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Transferencia:</span>
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Transferencias:</span>
       <strong style="color: var(--accent); font-size: 1.25rem; font-weight: 700;">$ {{transferencia}}</strong>
+    </div>
+  </div>
+
+  <!-- Fila 2: Total Pagos y Cantidad Transferencias -->
+  <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+    <div class="total-transacciones"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(107, 114, 128, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(107, 114, 128, 0.25);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Total Pagos:</span>
+      <strong style="color: #4b5563; font-size: 1.25rem; font-weight: 700;">{{totalPagos}}</strong>
+    </div>
+    <div class="cant-transferencias"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(59, 130, 246, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(59, 130, 246, 0.2);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Cant. Transferencias:</span>
+      <strong style="color: #2563eb; font-size: 1.25rem; font-weight: 700;">{{cantidadTransferencias}}</strong>
+    </div>
+  </div>
+
+  <!-- Fila 3: Datos restantes -->
+  <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+    <div class="total-extras"
+      style="display: flex; align-items: center; gap: 0.5rem; background: rgba(139, 92, 246, 0.1); padding: 0.5rem 1.25rem; border-radius: var(--radius); border: 1px solid rgba(139, 92, 246, 0.2);">
+      <span style="font-weight: 600; color: var(--text-light); font-size: 0.9rem;">Recargos Extras:</span>
+      <strong style="color: #7c3aed; font-size: 1.25rem; font-weight: 700;">$ {{extras}}</strong>
     </div>
   </div>
 </div>

@@ -13,19 +13,24 @@ export async function resumenFacturasFecha(fecha) {
 
     let efectivo = 0;
     let transferencia = 0;
-    let entradaTotal = 0;
+    let total = 0;
+    let cantidadTransferencias = 0;
+    let extras = 0;
 
+    // ESTO QUIZAS SE PODRIA GESTIONAR CON UN HELPER DESDE LA VISTA?
     facturas.forEach(factura => {
         if (!factura.esTransferencia) {
-            efectivo += factura.importe
+            efectivo += factura.importe;
         } else {
             transferencia += factura.importe + factura.recargo
+            cantidadTransferencias++;
+            extras += factura.recargo;
         }
     });
 
-    entradaTotal = efectivo + transferencia;
+    total = efectivo + transferencia;
 
     return {
-        facturas, entradaTotal, efectivo, transferencia, totalTransacciones: facturas.length
+        cantidadTransferencias, extras, facturas, total, efectivo, transferencia, totalPagos: facturas.length
     }
 } 

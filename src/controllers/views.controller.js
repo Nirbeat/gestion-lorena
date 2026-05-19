@@ -31,15 +31,18 @@ export async function mostrarFormulario(req, res, next) {
 export async function mostrarReporteDiario(req, res, next) {
     const { fecha } = req.query;
 
-    const { facturas, efectivo, totalTransacciones, transferencia, entradaTotal } = await resumenFacturasFecha(fecha);
+    const {
+        cantidadTransferencias, extras, facturas, total, efectivo, transferencia, totalPagos } = await resumenFacturasFecha(fecha);
 
     res.render('reportediario', {
         titulo: 'Reporte Diario',
-        facturas,
         fecha,
+        cantidadTransferencias,
+        extras,
+        facturas,
         efectivo,
-        entradaTotal,
+        total,
         transferencia,
-        totalTransacciones
+        totalPagos
     });
 };
