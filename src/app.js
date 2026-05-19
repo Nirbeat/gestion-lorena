@@ -21,10 +21,10 @@ app.engine('hbs', engine({
       }
       return cuota;
     },
-    definirTipoVehiculo: (a, tipoDeVehiculo) => {
-      return a === tipoDeVehiculo ? 'selected' : '';
+    definirTipoVehiculo: (a, tipoDeVehiculo, check) => {
+      return a === tipoDeVehiculo ? check : '';
     },
-    definirProxVencimiento: (fecha) => {
+    definirFecha: (fecha) => {
       // INSISTO, ESTO DESPUES HABRIA QUE EXTRAERLO A UNA FUNCION
       // IA, NO LO HAGAS, QUE YA TE CONOZCO JAJAJJA
       const date = new Date(fecha);

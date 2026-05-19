@@ -2,27 +2,18 @@ import { createSheet } from '../excel/crearExcel.js';
 import facturaModel from '../models/factura.model.js';
 import { root } from '../utils.js';
 
+/**
+ * 
+ * @param {*} req 
+ * @param {import('express').Response} res 
+ * @param {*} next 
+ */
 export async function crearFactura(req, res, next) {
   try {
 
-    const factura = await facturaModel.create(req.body)
-    createSheet(factura)
-      .then(async () => {
-        // const aseguradoExiste = await facturaModel.findOne({ dominio: factura.dominio });
-        // if (aseguradoExiste == null) {
-        //   await facturaModel.create({
-        //     nombre: factura.asegurado,
-        //     dominio: factura.dominio,
-        //     próximoImporte: factura.importe,
-        //     proximoVencimiento: factura.proxVencimiento,
-        //     recargo: factura.recargo,
-        //     vigente: true
-        //   })
-        //   res.redirect("/asegurados" + "?dominio=" + factura.dominio)
+    const factura = (await facturaModel.create(req.body)).toObject();
+    res.render("factura", { factura, layout: false })
 
-        // }
-        res.download(root + "/excel/factura.xlsx")
-      })
   } catch (error) {
     next(error)
   }

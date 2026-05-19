@@ -1,0 +1,83 @@
+<div class="recibo-box">
+    <table class="header-table">
+        <tr>
+            <td class="header-left">
+                <div class="brand-icons">🚗 👷 🏍️</div>
+                <strong>Las Margaritas</strong><br>
+                <span>Tristán Suárez</span><br>
+                <span>💬 1160344824</span>
+            </td>
+            <td class="header-right">
+                <h1>Cobranza por Cuenta de Terceros</h1>
+                <div class="meta-info">
+                    <strong>Fecha de Pago:</strong> {{definirFecha factura.fechaDePago}}<br>
+                    <strong>Número de Cuota:</strong> {{factura.cuota}}
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="data-row-block">
+        <span>COMPAÑÍA:</span>
+        <div class="value-slot">{{factura.compania}}</div>
+    </div>
+    <div class="data-row-block">
+        <span>ASEGURADO:</span>
+        <div class="value-slot">{{factura.asegurado}}</div>
+    </div>
+
+    <table class="details-table">
+        <tr>
+            <th>Número de Póliza</th>
+            <td>{{factura.nroPoliza}}</td>
+        </tr>
+        <tr>
+            <th>Tipo de Vehículo</th>
+            <td>
+                <span class="check-item">
+                    <span class="square">{{#if (definirTipoVehiculo factura.tipoDeVehiculo "auto"
+                        "checked")}}✓{{/if}}</span> Automotor
+                </span>
+                <span class="check-item">
+                    <span class="square">{{#if (definirTipoVehiculo factura.tipoDeVehiculo "moto"
+                        "checked")}}✓{{/if}}</span> Motovehículo
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>Marca / Modelo</th>
+            <td>{{factura.vehiculo}}</td>
+        </tr>
+        <tr>
+            <th>Dominio</th>
+            <td>{{factura.dominio}}</td>
+        </tr>
+        <tr>
+            <th>Cobertura</th>
+            <td>{{factura.cobertura}}</td>
+        </tr>
+        <tr>
+            <th>Otros</th>
+            <td>{{factura.otros}}</td>
+        </tr>
+    </table>
+
+    <table class="footer-table">
+        <tr>
+            <td class="footer-cell footer-left">
+                <div class="vencimiento-txt">PRÓXIMO VENCIMIENTO: {{definirFecha
+                    factura.proxVencimiento}}</div>
+                {{#if factura.esTransferencia}}
+                <div class="legal-txt">Incluye el valor de {{factura.recargo}} en concepto de servicios de
+                    cobranza.</div>
+                {{/if}}
+            </td>
+            <td class="footer-cell footer-right">
+                <div class="amount-box">
+                    <span class="lbl">TOTAL:</span>
+                    <span class="val">$ {{factura.importe}}</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

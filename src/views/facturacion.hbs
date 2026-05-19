@@ -43,8 +43,8 @@
       <label for="tipoDeVehiculo">Tipo de vehículo</label>
       <select name="tipoDeVehiculo">
         <option value="---" {{definirTipoVehiculo asegurado.tipoDeVehiculo "---" }}>No aplica</option>
-        <option value="auto" {{definirTipoVehiculo asegurado.tipoDeVehiculo "auto" }}>Auto</option>
-        <option value="moto" {{definirTipoVehiculo asegurado.tipoDeVehiculo "moto" }}>Moto</option>
+        <option value="auto" {{definirTipoVehiculo asegurado.tipoDeVehiculo "auto" "selected" }}>Auto</option>
+        <option value="moto" {{definirTipoVehiculo asegurado.tipoDeVehiculo "moto" "selected" }}>Moto</option>
       </select>
     </div>
 
@@ -77,7 +77,7 @@
 
     <div class="form-group">
       <label for="proxVencimiento">Próximo vencimiento</label>
-      <input type="date" name="proxVencimiento" value="{{definirProxVencimiento asegurado.proxVencimiento}}" required />
+      <input type="date" name="proxVencimiento" value="{{definirFecha asegurado.proxVencimiento}}" required />
     </div>
 
   </div>
