@@ -15,14 +15,14 @@
 
         @page {
             size: A4;
-            margin: 10mm 12mm;
+            margin: 0;
         }
 
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             color: #2d3748;
             background-color: #ffffff;
-            padding: 0;
+            padding: 10mm 12mm;
         }
 
         .print-area {
@@ -51,10 +51,14 @@
         .recibo-box {
             border: 1px solid #4a5568;
             border-radius: 6px;
-            padding: 8px 10px;
+            padding: 10px 12px;
             background-color: #ffffff;
             font-size: 8.8pt;
             line-height: 1.4;
+            min-height: 125mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .tipo-recibo {
@@ -78,7 +82,7 @@
 
         .header-left {
             width: 38%;
-            padding: 6px;
+            padding: 8px;
             font-size: 8pt;
             border-right: 1px solid #718096;
             vertical-align: middle;
@@ -91,7 +95,7 @@
 
         .header-right {
             width: 62%;
-            padding: 6px;
+            padding: 8px;
             text-align: center;
             vertical-align: middle;
         }
@@ -112,10 +116,10 @@
         .data-row-block {
             background-color: #edf2f7;
             border: 1px solid #cbd5e0;
-            padding: 6px 10px;
+            padding: 8px 12px;
             font-weight: bold;
             font-size: 9.5pt;
-            margin-bottom: 4px;
+            margin-bottom: 0;
             border-radius: 4px;
             display: flex;
             align-items: center;
@@ -135,13 +139,13 @@
         .details-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 6px;
+            margin-bottom: 0;
         }
 
         .details-table th,
         .details-table td {
             border: 1px solid #cbd5e0;
-            padding: 4px 7px;
+            padding: 6px 8px;
             text-align: left;
         }
 
@@ -186,7 +190,7 @@
 
         .footer-cell {
             border: 1px solid #4a5568;
-            padding: 6px;
+            padding: 8px;
             background-color: #ffffff;
             vertical-align: middle;
         }

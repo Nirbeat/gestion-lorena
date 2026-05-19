@@ -1,13 +1,5 @@
-import { createSheet } from '../excel/crearExcel.js';
 import facturaModel from '../models/factura.model.js';
-import { root } from '../utils.js';
 
-/**
- * 
- * @param {*} req 
- * @param {import('express').Response} res 
- * @param {*} next 
- */
 export async function crearFactura(req, res, next) {
   try {
 
